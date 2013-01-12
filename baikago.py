@@ -82,6 +82,7 @@ def calc_score(me=BLACK):
         op = BLACK
 
     oute = {BLACK: [], WHITE: []}
+    win = {BLACK: [], WHITE: []}
     for baika in baika_list:
         num_me = 0
         num_op = 0
@@ -91,7 +92,9 @@ def calc_score(me=BLACK):
             if v == op: num_op += 1
 
         if num_op == 0:
-            if num_me == 4:
+            if num_me == 5:
+                win[me].append(baika)
+            elif num_me == 4:
                 score = 960
                 oute[me].append(baika)
             elif num_me == 3:
@@ -105,7 +108,9 @@ def calc_score(me=BLACK):
             else:
                 continue
         elif num_me == 0:
-            if num_op == 4:
+            if num_op == 5:
+                win[op].append(baika)
+            elif num_op == 4:
                 score = 480
                 oute[op].append(baika)
             elif num_op == 3:
@@ -138,9 +143,13 @@ def calc_score(me=BLACK):
     print_map(map2)
 
     if oute[BLACK]:
-        print "OUTE BLACK:", oute[BLACK]
+        print "BLACK OUTE:", oute[BLACK]
     if oute[WHITE]:
-        print "OUTE WHITE:", oute[WHITE]
+        print "WHITE OUTE:", oute[WHITE]
+    if win[BLACK]:
+        print "BLACK WIN:", win[BLACK]
+    if win[WHITE]:
+        print "WHITE WIN:", win[WHITE]
 
     return best
 
