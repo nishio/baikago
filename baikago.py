@@ -60,8 +60,8 @@ def get((x, y)):
 
 def print_map(map_):
     print
-    print '  ' + ''.join('%2d' % x for x in RANGE) + ' x'
-    print '\n'.join('%2d ' % y + ' '.join(map_[y + RADIUS]) for y in RANGE)
+    print 'y\\x' + ''.join('%2d' % x for x in RANGE) + ' x'
+    print '\n'.join(' %2d ' % y + ' '.join(map_[y + RADIUS]) for y in RANGE)
     print ' y'
 
 def add_score((x, y), score):
@@ -74,13 +74,14 @@ def print_score():
     print
 
 def calc_score(me=BLACK):
-    global score_map
+    global score_map, oute
     score_map = [[0] * DIAMETER for _ in RANGE]
     if me == BLACK:
         op = WHITE
     else:
         op = BLACK
 
+    oute = {BLACK: [], WHITE: []}
     for baika in baika_list:
         num_me = 0
         num_op = 0
@@ -92,6 +93,7 @@ def calc_score(me=BLACK):
         if num_op == 0:
             if num_me == 4:
                 score = 960
+                oute[me].append(baika)
             elif num_me == 3:
                 score = 120
             elif num_me == 2:
@@ -105,6 +107,7 @@ def calc_score(me=BLACK):
         elif num_me == 0:
             if num_op == 4:
                 score = 480
+                oute[op].append(baika)
             elif num_op == 3:
                 score = 120
             elif num_op == 2:
@@ -133,6 +136,12 @@ def calc_score(me=BLACK):
                 map2[y + RADIUS][x + RADIUS] = "*"
                 best.append((x, y))
     print_map(map2)
+
+    if oute[BLACK]:
+        print "OUTE BLACK:", oute[BLACK]
+    if oute[WHITE]:
+        print "OUTE WHITE:", oute[WHITE]
+
     return best
 
 from random import choice
