@@ -103,8 +103,8 @@ def calc_score(me=BLACK):
                 score = 4
             elif num_me == 1:
                 score = 2
-            elif num_me == 0:
-                score = 1
+#            elif num_me == 0:
+#                score = 1
             else:
                 continue
         elif num_me == 0:
@@ -119,8 +119,8 @@ def calc_score(me=BLACK):
                 score = 4
             elif num_op == 1:
                 score = 2
-            elif num_op == 0:
-                score = 1
+#            elif num_op == 0:
+#                score = 1
         else:
             continue
 
